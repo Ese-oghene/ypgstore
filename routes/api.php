@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CartItemController;
 
 
 /*
@@ -35,8 +36,19 @@ use App\Http\Controllers\Api\ProductController;
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::prefix("admin")->middleware('admin')->group(function () {
 
+
+        // Cart Routes (authenticated users only)
+    Route::prefix('cart')->group(function () {
+        Route::get('/', [CartItemController::class, 'index']);
+        Route::post('/', [CartItemController::class, 'store']);
+        Route::patch('{cartItemId}', [CartItemController::class, 'update']);
+        Route::delete('{cartItemId}', [CartItemController::class, 'destroy']);
+        Route::delete('/', [CartItemController::class, 'empty']);
+    });
+
+
+    Route::prefix("admin")->middleware('admin')->group(function () {
          // Product routes restricted to admin
         Route::get('/index', [ProductController::class, 'index'])->name('admin.index');
         Route::post('/store', [ProductController::class, 'store'])->name('admin.store');
