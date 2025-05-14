@@ -6,9 +6,9 @@ use LaravelEasyRepository\BaseService;
 
 interface ProductService extends BaseService{
 
-    public function getAll();
-    public function getById($id);
-    public function create($data);
-    public function update($id, array $data);
-    public function delete($id);
+    public function getAllProduct();
+    public function getProductById($id);
+    public function createProduct(array $data);
+    public function updateProduct($id, array $data);
+    public function deleteProduct($id);
 }

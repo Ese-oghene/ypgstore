@@ -34,7 +34,7 @@ class ProductServiceImplement extends ServiceApi implements ProductService{
       $this->productRepository = $productRepository;
     }
 
-    public function getAll()
+    public function getAllProduct()
     {
         try {
             $products = $this->productRepository->all();
@@ -49,7 +49,7 @@ class ProductServiceImplement extends ServiceApi implements ProductService{
         }
     }
 
-    public function getById($id)
+    public function getProductById($id)
     {
         try {
             $product = $this->productRepository->find($id);
@@ -64,7 +64,7 @@ class ProductServiceImplement extends ServiceApi implements ProductService{
         }
     }
 
-    public function create($data)
+    public function createProduct(array $data)
     {
         try {
             // Handle file input
@@ -84,7 +84,7 @@ class ProductServiceImplement extends ServiceApi implements ProductService{
         }
     }
 
-     public function update($id, array $data)
+     public function updateProduct($id, array $data)
     {
         try {
             if (isset($data['product_image']) && $data['product_image']->isValid()) {
@@ -103,7 +103,7 @@ class ProductServiceImplement extends ServiceApi implements ProductService{
         }
     }
 
-     public function delete($id)
+     public function deleteProduct($id)
     {
         try {
             $this->productRepository->delete($id);
